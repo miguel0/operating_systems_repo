@@ -1,8 +1,12 @@
-#include <stdio.h>
+#include "./libhello.h"
 
-int main()
+int main(int argc, char **argv)
 {
-    printf("hello world\n");
+    int i = 0;
+    for(i = 1; i < argc; i++)
+    {
+        printHello(argv[i]);
+    }
 
     return 0;
 }
