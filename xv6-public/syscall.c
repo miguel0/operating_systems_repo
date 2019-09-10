@@ -132,6 +132,32 @@ static int (*syscalls[])(void) = {
 [SYS_reboot] sys_reboot,
 };
 
+char* funcNames[23] = {
+    "fork",
+    "exit",
+    "wait",
+    "pipe",
+    "read",
+    "kill",
+    "exec",
+    "fstat",
+    "chdir",
+    "dup",
+    "getpid",
+    "sbrk",
+    "sleep",
+    "uptime",
+    "open",
+    "write",
+    "mknod",
+    "unlink",
+    "link",
+    "mkdir",
+    "close",
+    "shutdown",
+    "reboot"
+};
+
 void
 syscall(void)
 {
@@ -140,6 +166,9 @@ syscall(void)
 
   num = curproc->tf->eax;
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
+    cprintf("Function: ");
+    cprintf(funcNames[num - 1]);
+    cprintf("\n");
     curproc->tf->eax = syscalls[num]();
   } else {
     cprintf("%d %s: unknown sys call %d\n",
