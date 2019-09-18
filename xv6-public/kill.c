@@ -12,6 +12,10 @@ main(int argc, char **argv)
     exit();
   }
   for(i=1; i<argc; i++)
-    kill(atoi(argv[i]));
+    if (atoi(argv[i]) == 1) {
+        printf(1, "Don't kill the father of fathers!!\n");
+    } else {
+        kill(atoi(argv[i]));
+    }
   exit();
 }
