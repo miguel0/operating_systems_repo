@@ -3,9 +3,16 @@
 #include <unistd.h>
 #include <signal.h>
 
+int stopInf = 1;
+int stopPrint = 1;
+
 void signalHandler(int signum)
 {
-    printf("Signal received: %d.\n", signum);
+    if(stopPrint == 0)
+    {
+        printf("Signal received: %d.\n", signum);
+        stopInf = 0;
+    }
 }
 
 int main()
@@ -17,12 +24,23 @@ int main()
     if(pid == 0)
     {
         printf("I am son.\n");
-        for(;;);
+        while(stopInf == 1)
+        {
+            if(stopPrint == 1)
+            {
+                printf("In the loop.\n");
+                stopPrint = 0;
+            }
+        }
+        printf("Son stopped.\n");
     }
     else
     {
         printf("I am parent.\n");
-        kill(pid, 10);
-        for(;;);
+        for(;;)
+        {
+            kill(pid, 10);
+            sleep(1);
+        }
     }
 }
