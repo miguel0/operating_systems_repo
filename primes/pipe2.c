@@ -8,7 +8,6 @@ int main() {
 
   scanf("%d\n",&p);
   fprintf(stderr,"%d\n",p);
-  num = p;
 
   while(1){
     scanf("%d\n",&num);

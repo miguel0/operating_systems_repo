@@ -5,11 +5,18 @@
 int
 main(int argc, char **argv)
 {
-  if(argc != 2){
-    printf(2, "usage: wrong number of arguments.\n");
-    exit();
-  }
+  if(argc != 2) {
+    printf(2, "error: sleep can only have one parameter.\n");
+  } else {
+    int num = atoi(argv[1]) * 100;
 
-  sleep(atoi(argv[1]));
+    if(num > 0) {
+        printf(2, "Sleep starting.\n");
+        sleep(num);
+        printf(2, "Finished sleeping.\n");
+    } else {
+        printf(2, "Only positive numbers for sleep.\n");
+    }
+  }
   exit();
 }
